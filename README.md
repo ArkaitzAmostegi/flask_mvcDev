@@ -8,4 +8,5 @@ Siempre que se instalen nuevas dependencias hay que actualizar el archivo requir
 pip freeze > requirements.txt
 
 Arracar el proyecto
+venv/Scripts/activate
 python run
