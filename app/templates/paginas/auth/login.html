@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+{% block title %}Login{% endblock %}
+
+{% block content %}
+    <h1>Iniciar sesión</h1>
+
+    <form method="post" novalidate class="panel">
+        {{ form.hidden_tag() }}
+
+        <div>
+        <label for="{{ form.username.id }}">{{ form.username.label }}</label>
+        {{ form.username }}
+        {% for error in form.username.errors %}
+            <p role="alert">{{ error }}</p>
+        {% endfor %}
+        </div>
+
+        <div>
+        <label for="{{ form.password.id }}">{{ form.password.label }}</label>
+        {{ form.password }}
+        {% for error in form.password.errors %}
+            <p role="alert">{{ error }}</p>
+        {% endfor %}
+        </div>
+
+        {{ form.submit }}
+    </form>
+{% endblock %}

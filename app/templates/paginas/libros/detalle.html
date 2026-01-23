@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+{% block title %}Detalle{% endblock %}
+
+{% block content %}
+    <h1>Detalle del libro</h1>
+
+    <p><strong>Título:</strong> {{ libro.titulo }}</p>
+    <p><strong>Autor:</strong> {{ libro.autor }}</p>
+    <p><strong>Resumen:</strong> {{ libro.resumen or "-" }}</p>
+
+    <p>
+        <strong>Estado:</strong>
+        {% if libro.disponible %}
+        Disponible
+        {% else %}
+        Prestado (socio_id: {{ libro.socio_id }})
+        {% endif %}
+    </p>
+
+    <p>
+        <a href="{{ url_for('libros.editar', id=libro.id) }}">Editar libro</a>
+    </p>
+
+    <hr>
+
+    <h2>Prestar este libro</h2>
+
+    <form method="post" action="{{ url_for('libros.prestar', id=libro.id) }}" novalidate>
+        {{ form.hidden_tag() }}
+
+        <div>
+        <label for="{{ form.socio_codigo.id }}">{{ form.socio_codigo.label }}</label>
+        {{ form.socio_codigo }}
+        {% for error in form.socio_codigo.errors %}
+            <p role="alert">{{ error }}</p>
+        {% endfor %}
+        </div>
+
+        {{ form.submit }}
+    </form>
+{% endblock %}

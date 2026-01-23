@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+{% block title %}Préstamos{% endblock %}
+
+{% block content %}
+    <h1>Socios con préstamos</h1>
+
+    {% if socios %}
+        <ul>
+        {% for socio in socios %}
+            <li>
+            {{ socio.codigo }} — {{ socio.nombre }} — {{ socio.email }}
+            {% if socio.libro_prestado %}
+                — Libro: {{ socio.libro_prestado.titulo }}
+            {% endif %}
+            </li>
+        {% endfor %}
+        </ul>
+    {% else %}
+        <p>No hay préstamos activos.</p>
+    {% endif %}
+{% endblock %}

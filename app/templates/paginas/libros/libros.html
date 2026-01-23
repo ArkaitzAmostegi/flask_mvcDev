@@ -7,10 +7,17 @@
 
 <ul>
     {% for libro in libros %}
-        <li>Titulo: <a href="/libros/{{ libro.id }}">{{ libro.titulo }}</a> Autor: {{ libro.autor }}</li>
+        <li>
+            <a href="{{ url_for('libros.detalle', id=libro.id) }}">{{ libro.titulo }}</a>
+            — {{ libro.autor }}
+            — {% if libro.disponible %}Disponible{% else %}Prestado{% endif %}
+        </li>
+
         
     {% endfor %}
 </ul>
 
-<button onclick="location.href='{{ url_for('libros.crear') }}'">Crear nuevo libro</button>
+    <a class="btn" href="{{ url_for('libros.crear') }}">Crear nuevo libro</a>
+
     {% endblock %}
+

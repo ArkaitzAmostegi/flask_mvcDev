@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+{% block title %}Socios{% endblock %}
+
+{% block content %}
+    <h1>Socios</h1>
+
+    <a class="btn" href="{{ url_for('socios.crear') }}">Crear socio</a>
+
+    <hr>
+
+    {% if socios %}
+        <ul>
+        {% for socio in socios %}
+            <li>
+            <strong>{{ socio.codigo }}</strong> — {{ socio.nombre }} — {{ socio.email }}
+
+            {% if socio.libro_prestado %}
+                — <span class="pill bad">Prestado</span>
+                — Libro: <strong>{{ socio.libro_prestado.titulo }}</strong>
+            {% else %}
+                — <span class="pill ok">Sin préstamo</span>
+            {% endif %}
+
+            — <a href="{{ url_for('socios.editar', id=socio.id) }}">Editar</a>
+            </li>
+        {% endfor %}
+        </ul>
+    {% else %}
+        <p>No hay socios.</p>
+    {% endif %}
+{% endblock %}

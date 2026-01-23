@@ -9,6 +9,8 @@
     {% for libro in libros %}
         <div class="card">
             <h1>Titulo: {{ libro.titulo }}</h1><div class="autor">Autor: {{ libro.autor }}</div><div class="resumen">{{ libro.resumen }}</div>
+            <div class="autor">Estado: {% if libro.disponible %}Disponible{% else %}Prestado{% endif %}</div>
+            <a href="{{ url_for('libros.detalle', id=libro.id) }}">Ver detalle</a>
         </div>
     {% endfor %}
     </div>

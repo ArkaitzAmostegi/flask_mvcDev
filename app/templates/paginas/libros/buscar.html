@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+{% block title %}Buscar{% endblock %}
+
+{% block content %}
+    <h1>Buscar libros</h1>
+
+    <form method="post" novalidate>
+        {{ form.hidden_tag() }}
+
+        <div>
+        <label for="{{ form.titulo.id }}">{{ form.titulo.label }}</label>
+        {{ form.titulo }}
+        {% for error in form.titulo.errors %}
+            <p role="alert">{{ error }}</p>
+        {% endfor %}
+        </div>
+
+        {{ form.submit }}
+    </form>
+
+    <hr>
+
+    {% if libros %}
+        <h2>Resultados</h2>
+        <ul>
+        {% for libro in libros %}
+            <li>
+            <a href="{{ url_for('libros.detalle', id=libro.id) }}">{{ libro.titulo }}</a>
+            — {{ libro.autor }}
+            — {% if libro.disponible %}Disponible{% else %}Prestado{% endif %}
+            </li>
+        {% endfor %}
+        </ul>
+    {% endif %}
+{% endblock %}
