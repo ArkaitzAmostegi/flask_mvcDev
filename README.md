@@ -9,4 +9,4 @@ pip freeze > requirements.txt
 
 Arracar el proyecto
 venv/Scripts/activate
-python run
+python run.py

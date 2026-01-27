@@ -27,19 +27,19 @@
 </header>
 
 <main>
-    {% block content %}
-    {% endblock %}
-
+    <main>
     {% with messages = get_flashed_messages(with_categories=true) %}
-    {% if messages %}
-        <ul>
-        {% for category, msg in messages %}
+        {% if messages %}
+        <ul class="flash">
+            {% for category, msg in messages %}
             <li class="{{ category }}">{{ msg }}</li>
-        {% endfor %}
+            {% endfor %}
         </ul>
-    {% endif %}
+        {% endif %}
     {% endwith %}
 
+    {% block content %}{% endblock %}
+</main>
 </main>
 <footer>
     <p>&copy; 2025 Mi aplicación</p>

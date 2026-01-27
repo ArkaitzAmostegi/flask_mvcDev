@@ -1,11 +1,67 @@
 {% extends "base.html" %}
-
 {% block title %}Inicio{% endblock %}
 
 {% block content %}
+  <section class="hero panel">
+    <h1>Gestión de biblioteca</h1>
+    <p class="small">
+      Aplicación Flask MVC para gestionar libros, socios y préstamos.
+      Permite buscar libros por título, prestar/devolver y ver préstamos activos.
+    </p>
 
+    {% if not current_user.is_authenticated %}
+      <p class="small">
+        Para crear/editar y gestionar préstamos debes iniciar sesión como administrador.
+      </p>
+      <a class="btn" href="{{ url_for('auth.login') }}">Login admin</a>
+    {% else %}
+      <span class="pill ok">Sesión iniciada</span>
+    {% endif %}
+  </section>
 
-<h2>Landing page</h2>
+  <h2 style="margin-top: 1.5rem;">Accesos rápidos</h2>
 
+  <div class="grid-container">
+    <div class="card">
+      <div class="title-bar"><h3>Libros</h3></div>
+      <p class="small">Listado completo y estado (disponible/prestado).</p>
+      <a class="btn" href="{{ url_for('libros.listar') }}">Ver libros</a>
+      {% if current_user.is_authenticated %}
+        <a class="btn secondary" href="{{ url_for('libros.crear') }}">Crear libro</a>
+      {% endif %}
+    </div>
 
+    <div class="card">
+      <div class="title-bar"><h3>Disponibles</h3></div>
+      <p class="small">Solo los libros que no están prestados.</p>
+      <a class="btn" href="{{ url_for('libros.disponibles') }}">Ver disponibles</a>
+    </div>
+
+    <div class="card">
+      <div class="title-bar"><h3>Buscar</h3></div>
+      <p class="small">Búsqueda por título (ignora mayúsculas/minúsculas).</p>
+      <a class="btn" href="{{ url_for('libros.buscar') }}">Buscar libro</a>
+    </div>
+
+    <div class="card">
+        <div class="title-bar"><h3>Devolución</h3></div>
+        <p class="small">Devolver un libro indicando el código del socio.</p>
+        <a class="btn" href="{{ url_for('libros.devolver') }}">Devolver</a>
+    </div>
+
+    <div class="card">
+        <div class="title-bar"><h3>Socios</h3></div>
+        <p class="small">Alta/edición de socios y su estado de préstamo.</p>
+        <a class="btn" href="{{ url_for('socios.listar') }}">Ver socios</a>
+        {% if current_user.is_authenticated %}
+            <a class="btn secondary" href="{{ url_for('socios.crear') }}">Crear socio</a>
+        {% endif %}
+    </div>
+
+    <div class="card">
+        <div class="title-bar"><h3>Préstamos activos</h3></div>
+        <p class="small">Socios con un libro prestado y qué libro tienen.</p>
+        <a class="btn" href="{{ url_for('libros.prestamos') }}">Ver préstamos</a>
+    </div>
+</div>
 {% endblock %}
