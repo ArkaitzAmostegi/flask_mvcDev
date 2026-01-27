@@ -9,21 +9,21 @@
 
 <header>
     <nav>
-        {% from "macros.html" import nothing %} {# si no tienes macros, ignora #}
-        {% if current_user.is_authenticated %}
-        <a href="{{ url_for('auth.logout') }}">Logout</a>
-        {% else %}
-        <a href="{{ url_for('auth.login') }}">Login</a>
-        {% endif %}
         <a href="{{ url_for('navigation.inicio') }}">Inicio</a>
-        <a href="{{ url_for('libros.grid') }}">Libros Grid</a>
-        <a href="{{ url_for('socios.listar') }}">Socios</a>
+        <a href="{{ url_for('libros.listar') }}">Libros</a>
         <a href="{{ url_for('libros.disponibles') }}">Disponibles</a>
         <a href="{{ url_for('libros.buscar') }}">Buscar</a>
-        <a href="{{ url_for('libros.prestamos') }}">Préstamos</a>
         <a href="{{ url_for('libros.devolver') }}">Devolver</a>
-        <a href="{{ url_for('libros.listar') }}">Editar Libros</a>
-    </nav>
+        <a href="{{ url_for('socios.listar') }}">Socios</a>
+        <a href="{{ url_for('libros.prestamos') }}">Préstamos</a>
+
+        {% if current_user.is_authenticated %}
+            <a href="{{ url_for('auth.logout') }}">Logout</a>
+        {% else %}
+            <a href="{{ url_for('auth.login') }}">Login</a>
+        {% endif %}
+</nav>
+
 </header>
 
 <main>
