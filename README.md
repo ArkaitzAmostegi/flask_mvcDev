@@ -55,7 +55,7 @@ Los formularios:
 
 ### 1) Clonar
 ```bash
-git clone <TU_REPO_GITHUB>
+git clone https://github.com/ArkaitzAmostegi/flask_mvcDev
 cd flask_mvcDev
 ````
 
