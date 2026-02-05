@@ -176,6 +176,9 @@ flask_mvcDev/
 
 ### API (ejemplo)
 
-* `/api/listar` Libros en JSON
+* `/api/libros`
+* `/api/libros/disponibles`
+* `/api/libros/buscar/<titulo>`
+* `/api/libros/socios/prestamos`
 
 ---

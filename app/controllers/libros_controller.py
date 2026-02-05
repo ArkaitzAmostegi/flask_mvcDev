@@ -109,6 +109,7 @@ def devolver():
 
 
 @libros_bp.route("/socios/prestamos")
+@role_required("admin")
 def prestamos():
     socios = socios_con_prestamo()
     return render_template("paginas/socios/prestamos.html", socios=socios)

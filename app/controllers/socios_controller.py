@@ -8,6 +8,7 @@ from app.decorators.auth import role_required
 socios_bp = Blueprint("socios", __name__, url_prefix="/socios")
 
 @socios_bp.route("/")
+@role_required("admin")
 def listar():
     socios = listar_socios()
     return render_template("paginas/socios/socios.html", socios=socios)
