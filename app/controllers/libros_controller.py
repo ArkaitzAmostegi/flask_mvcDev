@@ -1,4 +1,4 @@
-from flask import Blueprint, request, render_template, redirect, url_for, flash
+from flask import Blueprint, render_template, redirect, url_for, flash
 
 from app.forms.buscar_form import BuscarForm
 from app.forms.prestamo_form import PrestamoForm
