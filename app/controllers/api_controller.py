@@ -21,7 +21,6 @@ def api_buscar(titulo):
     return jsonify([l.to_dict() for l in libros])
 
 @api_bp.route("/libros/socios/prestamos", methods=["GET"])
-@role_required("admin")
 def api_socios_prestamos():
     socios = socios_con_prestamo()
     return jsonify([s.to_dict() for s in socios])
