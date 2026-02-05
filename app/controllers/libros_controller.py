@@ -14,6 +14,7 @@ from app.services.libros_service import (
 
 from app.decorators.prestamos import validar_prestamo
 from app.models.libro import Libro
+from app.services.libros_service import obtener_libro_o_404
 
 
 libros_bp = Blueprint("libros", __name__, url_prefix="/libros")
@@ -43,7 +44,7 @@ def buscar():
 # DETALLE (ver + form de préstamo)
 @libros_bp.route("/<int:id>", methods=["GET"])
 def detalle(id):
-    libro = Libro.query.get_or_404(id)
+    libro = obtener_libro_o_404(id)
     form = PrestamoForm()
     return render_template("paginas/libros/detalle.html", libro=libro, form=form)
 
@@ -64,9 +65,9 @@ def prestar(id):
 @libros_bp.route("/<int:id>/editar", methods=["GET", "POST"])
 @role_required("admin")
 def editar(id):
-    libro = Libro.query.get_or_404(id)
+    libro = obtener_libro_o_404(id)
     form = LibroForm(obj=libro)
-
+    
     if form.validate_on_submit():
         editar_libro(
             libro_id=id,

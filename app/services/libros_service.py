@@ -2,6 +2,8 @@ from sqlalchemy import func
 from app.extensions import db
 from app.models.libro import Libro
 from app.models.socio import Socio
+from flask import abort
+from app.models.libro import Libro
 
 def listar_libros():
     return Libro.query.order_by(func.lower(Libro.titulo)).all()
@@ -71,3 +73,8 @@ def devolver_por_socio(socio_codigo: str):
 def socios_con_prestamo():
     return Socio.query.join(Libro, Libro.socio_id == Socio.id).all()
 
+def obtener_libro_o_404(libro_id: int) -> Libro:
+    libro = Libro.query.get(libro_id)
+    if not libro:
+        abort(404)
+    return libro
