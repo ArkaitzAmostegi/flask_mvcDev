@@ -4,18 +4,20 @@ from app.forms.buscar_form import BuscarForm
 from app.forms.prestamo_form import PrestamoForm
 from app.forms.devolucion_form import DevolucionForm
 from app.forms.libro_form import LibroForm
+
 from app.decorators.auth import role_required
+from app.decorators.prestamos import validar_prestamo
 
 from app.services.libros_service import (
     listar_libros, listar_disponibles, buscar_por_titulo,
-    crear_libro, editar_libro,
+    crear_libro, editar_libro, obtener_libro_o_404
+)
+
+from app.services.prestamos_service import (
     prestar_libro, devolver_por_socio, socios_con_prestamo
 )
 
-from app.decorators.prestamos import validar_prestamo
-from app.models.libro import Libro
-from app.services.libros_service import obtener_libro_o_404
-
+from app.services.libros_service import borrar_libro
 
 libros_bp = Blueprint("libros", __name__, url_prefix="/libros")
 
@@ -120,3 +122,10 @@ def grid():
     libros = listar_libros()
     return render_template("paginas/libros/librosGrid.html", libros=libros)
 
+
+@libros_bp.route("/<int:id>/borrar", methods=["POST"])
+@role_required("admin")
+def borrar(id):
+    ok, msg = borrar_libro(id)
+    flash(msg, "ok" if ok else "error")
+    return redirect(url_for("libros.listar"))

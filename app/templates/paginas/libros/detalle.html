@@ -38,4 +38,9 @@
 
         {{ form.submit }}
     </form>
+
+    <form method="post" action="{{ url_for('libros.borrar', id=libro.id) }}">
+        <button class="btn danger" type="submit">Borrar</button>
+    </form>
+
 {% endblock %}

@@ -7,6 +7,9 @@ def listar_socios():
 def obtener_socio(id: int):
     return Socio.query.get(id)
 
+def obtener_socio_por_codigo(codigo: str):
+    return Socio.query.filter_by(codigo=codigo).first()
+
 def crear_socio(codigo: str, nombre: str, email: str):
     socio = Socio(codigo=codigo, nombre=nombre, email=email)
     db.session.add(socio)
@@ -22,3 +25,15 @@ def editar_socio(socio_id: int, codigo=None, nombre=None, email=None):
     if email is not None: socio.email = email
     db.session.commit()
     return socio
+
+def borrar_socio(socio_id: int):
+    socio = Socio.query.get(socio_id)
+    if not socio:
+        return False, "El socio no existe"
+
+    if socio.libro_prestado is not None:
+        return False, "No se puede borrar: el socio tiene un libro prestado"
+
+    db.session.delete(socio)
+    db.session.commit()
+    return True, "Socio borrado"
