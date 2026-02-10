@@ -2,34 +2,40 @@
 {% block title %}Socios{% endblock %}
 
 {% block content %}
-    <h1>Socios</h1>
+<h1>Socios</h1>
 
-    <a class="btn" href="{{ url_for('socios.crear') }}">Crear socio</a>
+<div style="display:flex; gap:.5rem; flex-wrap:wrap;">
+  <a class="btn" href="{{ url_for('socios.crear') }}">Crear socio</a>
+  <a class="btn secondary" href="{{ url_for('socios.buscar') }}">Buscar socio</a>
+</div>
 
-    <hr>
+<hr>
 
-    {% if socios %}
-        <ul>
-        {% for socio in socios %}
-            <li>
-            <strong>{{ socio.codigo }}</strong> — {{ socio.nombre }} — {{ socio.email }}
+{% if socios %}
+  <ul>
+    {% for socio in socios %}
+      <li>
+        <strong>{{ socio.codigo }}</strong> — {{ socio.nombre }} — {{ socio.email }}
 
-            {% if socio.libro_prestado %}
-                — <span class="pill bad">Prestado</span>
-                — Libro: <strong>{{ socio.libro_prestado.titulo }}</strong>
-            {% else %}
-                — <span class="pill ok">Sin préstamo</span>
-            {% endif %}
+        {% if socio.libro_prestado %}
+          — <span class="pill bad">Prestado</span>
+          — Libro: <strong>{{ socio.libro_prestado.titulo }}</strong>
+        {% else %}
+          — <span class="pill ok">Sin préstamo</span>
+        {% endif %}
 
-            — <a href="{{ url_for('socios.editar', id=socio.id) }}">Editar</a>
-            </li>
-        {% endfor %}
-        </ul>
-    {% else %}
-        <p>No hay socios.</p>
-    {% endif %}
-    <form method="post" action="{{ url_for('socios.borrar', id=socio.id) }}" style="display:inline">
-        <button class="btn danger" type="submit">Borrar</button>
-    </form>
+        — <a href="{{ url_for('socios.editar', id=socio.id) }}">Editar</a>
 
+        <form method="post"
+              action="{{ url_for('socios.borrar', id=socio.id) }}"
+              style="display:inline"
+              onsubmit="return confirm('¿Borrar socio {{ socio.codigo }}?');">
+          <button type="submit" class="btn danger">Borrar</button>
+        </form>
+      </li>
+    {% endfor %}
+  </ul>
+{% else %}
+  <p>No hay socios.</p>
+{% endif %}
 {% endblock %}

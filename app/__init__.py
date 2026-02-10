@@ -48,5 +48,12 @@ def create_app():
             u.set_password("1234")
             db.session.add(u)
             db.session.commit()
+            
+     # Seed (solo para pruebas)
+        from app.seed import seed_data
+        ok, msg = seed_data()
+        # Si no quieres mensajes, puedes borrar estas dos líneas:
+        print(msg)
 
     return app
+
