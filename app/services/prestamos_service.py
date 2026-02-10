@@ -4,6 +4,11 @@ from app.models.socio import Socio
 from app.models.libro import Libro
 from app.services.libros_service import obtener_libro
 from app.services.socios_service import obtener_socio_por_codigo
+from app.services.socios_service import socios_con_prestamo as socios_con_prestamo_service
+
+def socios_con_prestamo():
+    return socios_con_prestamo_service()
+
 
 def prestar_libro(libro_id: int, socio_codigo: str):
     libro = obtener_libro(libro_id)
@@ -37,9 +42,4 @@ def devolver_por_socio(socio_codigo: str):
     return (True, "Devolución realizada")
 
 def socios_con_prestamo():
-    return (
-        Socio.query
-        .join(Libro, Libro.socio_id == Socio.id)
-        .order_by(Socio.codigo.asc())
-        .all()
-    )
+    return socios_con_prestamo_service()

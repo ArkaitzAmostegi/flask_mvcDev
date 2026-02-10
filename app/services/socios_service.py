@@ -1,7 +1,7 @@
 from app.extensions import db
-from app.models.socio import Socio
 from sqlalchemy import or_, func
 from app.models.socio import Socio
+from app.models.libro import Libro 
 
 
 def listar_socios():
@@ -50,3 +50,11 @@ def buscar_socios(q: str):
             func.lower(Socio.email).like(func.lower(patron)),
         )
     ).order_by(func.lower(Socio.nombre)).all()
+    
+def socios_con_prestamo():
+    return (
+        Socio.query
+        .join(Libro, Libro.socio_id == Socio.id)
+        .order_by(Socio.codigo.asc())
+        .all()
+    )
