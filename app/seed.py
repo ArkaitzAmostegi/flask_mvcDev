@@ -19,7 +19,7 @@ def seed_data():
         Socio(codigo="S001", nombre="Ane Garcia", email="ane@demo.com"),
         Socio(codigo="S002", nombre="Iker Lopez", email="iker@demo.com"),
         Socio(codigo="S003", nombre="Maite Ruiz", email="maite@demo.com"),
-        Socio(codigo="S004", nombre="Jon Perez", email="jon@demo.com"),
+        Socio(codigo="S004", nombre="Piotr Alonso", email="piotrn@demo.com"),
         Socio(codigo="S005", nombre="Nerea Soto", email="nerea@demo.com"),
         Socio(codigo="S006", nombre="Unai Diaz", email="unai@demo.com"),
         Socio(codigo="S007", nombre="Leire Martin", email="leire@demo.com"),
