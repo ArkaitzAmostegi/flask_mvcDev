@@ -1,5 +1,8 @@
 from app.extensions import db
 from app.models.socio import Socio
+from sqlalchemy import or_, func
+from app.models.socio import Socio
+
 
 def listar_socios():
     return Socio.query.order_by(Socio.codigo.asc()).all()
@@ -37,3 +40,13 @@ def borrar_socio(socio_id: int):
     db.session.delete(socio)
     db.session.commit()
     return True, "Socio borrado"
+
+def buscar_socios(q: str):
+    q = (q or "").strip()
+    patron = f"%{q}%"
+    return Socio.query.filter(
+        or_(
+            func.lower(Socio.nombre).like(func.lower(patron)),
+            func.lower(Socio.email).like(func.lower(patron)),
+        )
+    ).order_by(func.lower(Socio.nombre)).all()

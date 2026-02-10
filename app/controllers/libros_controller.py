@@ -69,13 +69,15 @@ def prestar(id):
 def editar(id):
     libro = obtener_libro_o_404(id)
     form = LibroForm(obj=libro)
-    
+
     if form.validate_on_submit():
         editar_libro(
             libro_id=id,
             titulo=form.titulo.data,
             autor=form.autor.data,
-            resumen=form.resumen.data
+            resumen=form.resumen.data,
+            categoria=form.categoria.data,
+            anio=form.anio.data
         )
         flash("Libro actualizado", "ok")
         return redirect(url_for("libros.detalle", id=id))
@@ -91,12 +93,15 @@ def crear():
         crear_libro(
             titulo=form.titulo.data,
             autor=form.autor.data,
-            resumen=form.resumen.data
+            resumen=form.resumen.data,
+            categoria=form.categoria.data,
+            anio=form.anio.data
         )
         flash("Libro creado", "ok")
         return redirect(url_for("libros.listar"))
 
     return render_template("paginas/libros/libro_crear.html", form=form)
+
 
 
 @libros_bp.route("/devolver", methods=["GET", "POST"])

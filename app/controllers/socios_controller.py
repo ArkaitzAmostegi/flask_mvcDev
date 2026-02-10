@@ -5,6 +5,8 @@ from app.services.socios_service import listar_socios, crear_socio, editar_socio
 from app.decorators.auth import role_required
 from flask import abort
 from app.services.socios_service import borrar_socio
+from app.forms.socio_buscar_form import SocioBuscarForm
+from app.services.socios_service import buscar_socios
 
 
 socios_bp = Blueprint("socios", __name__, url_prefix="/socios")
@@ -62,3 +64,12 @@ def borrar(id):
     ok, msg = borrar_socio(id)
     flash(msg, "ok" if ok else "error")
     return redirect(url_for("socios.listar"))
+
+@socios_bp.route("/buscar", methods=["GET","POST"])
+@role_required("admin")
+def buscar():
+    form = SocioBuscarForm()
+    socios = []
+    if form.validate_on_submit():
+        socios = buscar_socios(form.q.data)
+    return render_template("paginas/socios/buscar.html", form=form, socios=socios)

@@ -1,9 +1,9 @@
+# app/services/prestamos_service.py
 from app.extensions import db
 from app.models.socio import Socio
 from app.models.libro import Libro
 from app.services.libros_service import obtener_libro
 from app.services.socios_service import obtener_socio_por_codigo
-
 
 def prestar_libro(libro_id: int, socio_codigo: str):
     libro = obtener_libro(libro_id)
@@ -23,7 +23,6 @@ def prestar_libro(libro_id: int, socio_codigo: str):
     libro.socio_id = socio.id
     db.session.commit()
     return (True, "Préstamo realizado")
-
 
 def devolver_por_socio(socio_codigo: str):
     socio = obtener_socio_por_codigo(socio_codigo)
