@@ -1,46 +1,45 @@
-<form method="post" novalidate>
-    {{ form.hidden_tag() }}
+<form method="post" novalidate> <!-- Envía por POST; novalidate desactiva validación HTML5 (manda validar WTForms) -->
+    {{ form.hidden_tag() }} <!-- Campos ocultos: CSRF token y otros hidden del formulario -->
 
     <div>
-        <label for="{{ form.titulo.id }}">{{ form.titulo.label }}</label>
-        {{ form.titulo }}
-        {% for error in form.titulo.errors %}
+        <label for="{{ form.titulo.id }}">{{ form.titulo.label }}</label> <!-- Etiqueta asociada al input 'titulo' -->
+        {{ form.titulo }} <!-- Renderiza el input del título -->
+        {% for error in form.titulo.errors %} <!-- Muestra errores de validación del campo -->
             <p role="alert">{{ error }}</p>
         {% endfor %}
     </div>
 
     <div>
-        <label for="{{ form.autor.id }}">{{ form.autor.label }}</label>
-        {{ form.autor }}
-        {% for error in form.autor.errors %}
+        <label for="{{ form.autor.id }}">{{ form.autor.label }}</label> <!-- Etiqueta del autor -->
+        {{ form.autor }} <!-- Input autor -->
+        {% for error in form.autor.errors %} <!-- Errores del autor -->
             <p role="alert">{{ error }}</p>
         {% endfor %}
     </div>
 
     <div>
-        <label for="{{ form.resumen.id }}">{{ form.resumen.label }}</label>
-        {{ form.resumen }}
-        {% for error in form.resumen.errors %}
+        <label for="{{ form.resumen.id }}">{{ form.resumen.label }}</label> <!-- Etiqueta del resumen -->
+        {{ form.resumen }} <!-- Textarea resumen -->
+        {% for error in form.resumen.errors %} <!-- Errores del resumen -->
             <p role="alert">{{ error }}</p>
         {% endfor %}
     </div>
 
     <div>
-        <label for="{{ form.categoria.id }}">{{ form.categoria.label }}</label>
-        {{ form.categoria }}
-        {% for error in form.categoria.errors %}
+        <label for="{{ form.categoria.id }}">{{ form.categoria.label }}</label> <!-- Etiqueta de categoría -->
+        {{ form.categoria }} <!-- Input categoría -->
+        {% for error in form.categoria.errors %} <!-- Errores de categoría -->
             <p role="alert">{{ error }}</p>
         {% endfor %}
     </div>
 
     <div>
-        <label for="{{ form.anio.id }}">{{ form.anio.label }}</label>
-        {{ form.anio }}
-        {% for error in form.anio.errors %}
+        <label for="{{ form.anio.id }}">{{ form.anio.label }}</label> <!-- Etiqueta del año -->
+        {{ form.anio }} <!-- Input numérico año -->
+        {% for error in form.anio.errors %} <!-- Errores del año -->
             <p role="alert">{{ error }}</p>
         {% endfor %}
     </div>
 
-
-    {{ form.submit }}
+    {{ form.submit }} <!-- Botón de enviar -->
 </form>

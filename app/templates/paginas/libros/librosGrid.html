@@ -1,18 +1,22 @@
-{% extends "base.html" %}
+{% extends "base.html" %} <!-- Hereda la plantilla base -->
 
-{% block title %}Libros{% endblock %}
+{% block title %}Libros{% endblock %} <!-- Título de la página -->
 
-{% block content %}
+{% block content %} <!-- Contenido principal -->
 <h1>Libros</h1>
 
-<div class="grid-container">
-    {% for libro in libros %}
-        <div class="card">
-            <h1>Titulo: {{ libro.titulo }}</h1><div class="autor">Autor: {{ libro.autor }}</div><div class="resumen">{{ libro.resumen }}</div>
-            <div class="autor">Estado: {% if libro.disponible %}Disponible{% else %}Prestado{% endif %}</div>
-            <a href="{{ url_for('libros.detalle', id=libro.id) }}">Ver detalle</a>
+<div class="grid-container"> <!-- Contenedor para mostrar los libros en formato rejilla -->
+    {% for libro in libros %} <!-- Recorre la lista de libros -->
+        <div class="card"> <!-- Tarjeta individual de un libro -->
+            <h1>Titulo: {{ libro.titulo }}</h1> <!-- Muestra el título -->
+            <div class="autor">Autor: {{ libro.autor }}</div> <!-- Muestra el autor -->
+            <div class="resumen">{{ libro.resumen }}</div> <!-- Muestra el resumen -->
+            <div class="autor">
+                Estado: {% if libro.disponible %}Disponible{% else %}Prestado{% endif %} <!-- Estado del libro -->
+            </div>
+            <a href="{{ url_for('libros.detalle', id=libro.id) }}">Ver detalle</a> <!-- Enlace al detalle -->
         </div>
     {% endfor %}
-    </div>
+</div>
 
 {% endblock %}

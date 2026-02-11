@@ -1,46 +1,46 @@
-{% extends "base.html" %}
-{% block title %}Detalle{% endblock %}
+{% extends "base.html" %} <!-- Hereda la plantilla base -->
+{% block title %}Detalle{% endblock %} <!-- Título de la página -->
 
-{% block content %}
+{% block content %} <!-- Bloque principal de contenido -->
     <h1>Detalle del libro</h1>
 
-    <p><strong>Título:</strong> {{ libro.titulo }}</p>
-    <p><strong>Autor:</strong> {{ libro.autor }}</p>
-    <p><strong>Resumen:</strong> {{ libro.resumen or "-" }}</p>
+    <p><strong>Título:</strong> {{ libro.titulo }}</p> <!-- Muestra el título del libro -->
+    <p><strong>Autor:</strong> {{ libro.autor }}</p> <!-- Muestra el autor -->
+    <p><strong>Resumen:</strong> {{ libro.resumen or "-" }}</p> <!-- Si no hay resumen, muestra "-" -->
 
     <p>
         <strong>Estado:</strong>
-        {% if libro.disponible %}
+        {% if libro.disponible %} <!-- Si no está prestado -->
         Disponible
-        {% else %}
-        Prestado (socio_id: {{ libro.socio_id }})
+        {% else %} <!-- Si está prestado -->
+        Prestado (socio_id: {{ libro.socio_id }}) <!-- Muestra el id del socio que lo tiene -->
         {% endif %}
     </p>
 
     <p>
-        <a href="{{ url_for('libros.editar', id=libro.id) }}">Editar libro</a>
+        <a href="{{ url_for('libros.editar', id=libro.id) }}">Editar libro</a> <!-- Enlace a la edición -->
     </p>
 
     <hr>
 
     <h2>Prestar este libro</h2>
 
-    <form method="post" action="{{ url_for('libros.prestar', id=libro.id) }}" novalidate>
-        {{ form.hidden_tag() }}
+    <form method="post" action="{{ url_for('libros.prestar', id=libro.id) }}" novalidate> <!-- POST a /libros/<id>/prestar -->
+        {{ form.hidden_tag() }} <!-- CSRF token y campos ocultos -->
 
         <div>
-        <label for="{{ form.socio_codigo.id }}">{{ form.socio_codigo.label }}</label>
-        {{ form.socio_codigo }}
-        {% for error in form.socio_codigo.errors %}
+        <label for="{{ form.socio_codigo.id }}">{{ form.socio_codigo.label }}</label> <!-- Etiqueta del código de socio -->
+        {{ form.socio_codigo }} <!-- Input para introducir el código del socio -->
+        {% for error in form.socio_codigo.errors %} <!-- Errores del campo -->
             <p role="alert">{{ error }}</p>
         {% endfor %}
         </div>
 
-        {{ form.submit }}
+        {{ form.submit }} <!-- Botón "Prestar" -->
     </form>
 
-    <form method="post" action="{{ url_for('libros.borrar', id=libro.id) }}">
-        <button class="btn danger" type="submit">Borrar</button>
+    <form method="post" action="{{ url_for('libros.borrar', id=libro.id) }}"> <!-- POST para borrar el libro -->
+        <button class="btn danger" type="submit">Borrar</button> <!-- Botón de borrado -->
     </form>
 
 {% endblock %}

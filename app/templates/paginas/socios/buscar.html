@@ -1,34 +1,34 @@
-{% extends "base.html" %}
-{% block title %}Buscar socios{% endblock %}
+{% extends "base.html" %} <!-- Hereda la plantilla base -->
+{% block title %}Buscar socios{% endblock %} <!-- Título de la página -->
 
-{% block content %}
+{% block content %} <!-- Contenido principal -->
   <h1>Buscar socios</h1>
 
-  <form method="post" novalidate class="panel">
-    {{ form.hidden_tag() }}
+  <form method="post" novalidate class="panel"> <!-- POST para enviar búsqueda; novalidate: valida WTForms -->
+    {{ form.hidden_tag() }} <!-- CSRF token + campos ocultos -->
 
     <div>
-      <label for="{{ form.q.id }}">{{ form.q.label }}</label>
-      {{ form.q }}
-      {% for error in form.q.errors %}
+      <label for="{{ form.q.id }}">{{ form.q.label }}</label> <!-- Etiqueta del campo de búsqueda -->
+      {{ form.q }} <!-- Input con el texto a buscar (nombre o email) -->
+      {% for error in form.q.errors %} <!-- Errores de validación del campo -->
         <p role="alert">{{ error }}</p>
       {% endfor %}
     </div>
 
-    {{ form.submit }}
+    {{ form.submit }} <!-- Botón "Buscar" -->
   </form>
 
-  {% if socios %}
+  {% if socios %} <!-- Solo muestra resultados si hay socios -->
     <hr>
     <ul>
-      {% for socio in socios %}
+      {% for socio in socios %} <!-- Recorre los socios encontrados -->
         <li>
-          <strong>{{ socio.codigo }}</strong> — {{ socio.nombre }} — {{ socio.email }}
-          {% if socio.libro_prestado %}
-            — Libro: <strong>{{ socio.libro_prestado.titulo }}</strong>
+          <strong>{{ socio.codigo }}</strong> — {{ socio.nombre }} — {{ socio.email }} <!-- Datos básicos del socio -->
+          {% if socio.libro_prestado %} <!-- Si el socio tiene libro prestado -->
+            — Libro: <strong>{{ socio.libro_prestado.titulo }}</strong> <!-- Muestra el título del libro -->
           {% endif %}
         </li>
       {% endfor %}
     </ul>
   {% endif %}
-{% endblock %}
+{% endblock %} 

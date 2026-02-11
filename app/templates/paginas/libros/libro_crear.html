@@ -1,10 +1,8 @@
+{% extends "base.html" %} <!-- Hereda la plantilla base -->
+{% block title %}Editar libro{% endblock %} <!-- Título que verá el navegador/pestaña -->
 
-{% extends "base.html" %}
-{% block title %}Editar libro{% endblock %}
+{% block content %} <!-- Contenido principal de la página -->
+    <h1>Crear libro con flask-WTF</h1> <!-- Encabezado visible de la página (texto actual) -->
 
-
-{% block content %}
-
-<h1>Crear libro con flask-WTF</h1>
-{%include 'componentes/libro_form.html'%}
-{% endblock %}
+    {% include 'componentes/libro_form.html' %} <!-- Inserta el formulario reutilizable de libro -->
+{% endblock %} 

@@ -4,5 +4,12 @@ from wtforms import StringField, SubmitField
 from wtforms.validators import DataRequired, Length
 
 class SocioBuscarForm(FlaskForm):
-    q = StringField("Buscar (nombre o email)", validators=[DataRequired(), Length(max=120)])
-    submit = SubmitField("Buscar")
+    """Formulario para buscar socios por nombre o email."""
+    q = StringField(  # Texto de búsqueda (nombre o email)
+        "Buscar (nombre o email)",
+        validators=[
+            DataRequired(),  # Obligatorio: debe introducirse algo
+            Length(max=120)  # Límite para evitar textos demasiado largos
+        ]
+    )
+    submit = SubmitField("Buscar")  # Botón para lanzar la búsqueda

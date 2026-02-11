@@ -1,23 +1,19 @@
-{% extends "base.html" %}
+{% extends "base.html" %} <!-- Hereda la plantilla base -->
 
-{% block title %}Libros{% endblock %}
+{% block title %}Libros{% endblock %} <!-- Título de la página -->
 
-{% block content %}
+{% block content %} <!-- Contenido principal -->
 <h1>Libros</h1>
 
 <ul>
-    {% for libro in libros %}
+    {% for libro in libros %} <!-- Recorre la lista de libros que llega desde la ruta -->
         <li>
-            <a href="{{ url_for('libros.detalle', id=libro.id) }}">{{ libro.titulo }}</a>
-            — {{ libro.autor }}
-            — {% if libro.disponible %}Disponible{% else %}Prestado{% endif %}
+            <a href="{{ url_for('libros.detalle', id=libro.id) }}">{{ libro.titulo }}</a> <!-- Enlace al detalle -->
+            — {{ libro.autor }} <!-- Muestra autor -->
+            — {% if libro.disponible %}Disponible{% else %}Prestado{% endif %} <!-- Estado del libro -->
         </li>
-
-        
     {% endfor %}
 </ul>
 
-    <a class="btn" href="{{ url_for('libros.crear') }}">Crear nuevo libro</a>
-
-    {% endblock %}
-
+<a class="btn" href="{{ url_for('libros.crear') }}">Crear nuevo libro</a> <!-- Enlace al formulario de creación -->
+{% endblock %} 

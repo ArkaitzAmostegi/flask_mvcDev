@@ -1,21 +1,21 @@
-{% extends "base.html" %}
-{% block title %}Préstamos{% endblock %}
+{% extends "base.html" %} <!-- Hereda la plantilla base -->
+{% block title %}Préstamos{% endblock %} <!-- Título de la página -->
 
-{% block content %}
+{% block content %} <!-- Contenido principal -->
     <h1>Socios con préstamos</h1>
 
-    {% if socios %}
+    {% if socios %} <!-- Si hay socios con préstamo -->
         <ul>
-        {% for socio in socios %}
+        {% for socio in socios %} <!-- Recorre la lista de socios -->
             <li>
-            {{ socio.codigo }} — {{ socio.nombre }} — {{ socio.email }}
-            {% if socio.libro_prestado %}
-                — Libro: {{ socio.libro_prestado.titulo }}
+            {{ socio.codigo }} — {{ socio.nombre }} — {{ socio.email }} <!-- Datos del socio -->
+            {% if socio.libro_prestado %} <!-- Si tiene libro prestado asociado -->
+                — Libro: {{ socio.libro_prestado.titulo }} <!-- Muestra el título del libro -->
             {% endif %}
             </li>
         {% endfor %}
         </ul>
-    {% else %}
+    {% else %} <!-- Si no hay préstamos -->
         <p>No hay préstamos activos.</p>
     {% endif %}
-{% endblock %}
+{% endblock %} 

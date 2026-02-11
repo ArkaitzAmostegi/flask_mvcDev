@@ -1,20 +1,20 @@
-{% extends "base.html" %}
-{% block title %}Devolver{% endblock %}
+{% extends "base.html" %} <!-- Hereda la plantilla base -->
+{% block title %}Devolver{% endblock %} <!-- Título de la página -->
 
-{% block content %}
+{% block content %} <!-- Bloque principal de contenido -->
     <h1>Devolver libro</h1>
 
-    <form method="post" novalidate>
-        {{ form.hidden_tag() }}
+    <form method="post" novalidate> <!-- Envía por POST; novalidate: valida WTForms -->
+        {{ form.hidden_tag() }} <!-- CSRF token + campos ocultos del formulario -->
 
         <div>
-        <label for="{{ form.socio_codigo.id }}">{{ form.socio_codigo.label }}</label>
-        {{ form.socio_codigo }}
-        {% for error in form.socio_codigo.errors %}
+        <label for="{{ form.socio_codigo.id }}">{{ form.socio_codigo.label }}</label> <!-- Etiqueta del código de socio -->
+        {{ form.socio_codigo }} <!-- Input para introducir el código del socio -->
+        {% for error in form.socio_codigo.errors %} <!-- Errores de validación del campo -->
             <p role="alert">{{ error }}</p>
         {% endfor %}
         </div>
 
-        {{ form.submit }}
+        {{ form.submit }} <!-- Botón "Devolver" -->
     </form>
-{% endblock %}
+{% endblock %} 

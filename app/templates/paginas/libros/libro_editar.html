@@ -1,14 +1,14 @@
+{% extends "base.html" %} <!-- Hereda la plantilla base -->
+{% block title %}Editar libro{% endblock %} <!-- Título de la página -->
 
-{% extends "base.html" %}
-{% block title %}Editar libro{% endblock %}
+{% block content %} <!-- Bloque principal -->
+    <h1>Detalles del libro</h1>
 
+    <p><strong>Título:</strong> {{ libro.titulo }}</p> <!-- Muestra el título actual -->
+    <p><strong>Autor:</strong> {{ libro.autor }}</p> <!-- Muestra el autor actual -->
+    <p><strong>Resumen:</strong> {{ libro.resumen }}</p> <!-- Muestra el resumen actual -->
 
-{% block content %}
-<h1>Detalles del libro</h1>
-<p><strong>Título:</strong> {{ libro.titulo }}</p>
-<p><strong>Autor:</strong> {{ libro.autor }}</p>    
-<p><strong>Resumen:</strong> {{ libro.resumen }}</p>
-<h1>Editar libro con flask-WTF</h1>
+    <h1>Editar libro con flask-WTF</h1> <!-- Sección del formulario de edición -->
 
-{%include 'componentes/libro_form.html'%}
-{% endblock %}
+    {% include 'componentes/libro_form.html' %} <!-- Reutiliza el formulario común de libro -->
+{% endblock %} 

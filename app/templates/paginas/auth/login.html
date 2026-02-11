@@ -1,28 +1,28 @@
-{% extends "base.html" %}
-{% block title %}Login{% endblock %}
+{% extends "base.html" %} <!-- Usa la plantilla base (layout principal) -->
+{% block title %}Login{% endblock %} <!-- Título de la página (normalmente en <title>) -->
 
-{% block content %}
+{% block content %} <!-- Contenido principal que se inserta en base.html -->
     <h1>Iniciar sesión</h1>
 
-    <form method="post" novalidate class="panel">
-        {{ form.hidden_tag() }}
+    <form method="post" novalidate class="panel"> <!-- POST para enviar credenciales; novalidate: valida WTForms -->
+        {{ form.hidden_tag() }} <!-- Campos ocultos: CSRF token (seguridad) y otros hidden -->
 
         <div>
-        <label for="{{ form.username.id }}">{{ form.username.label }}</label>
-        {{ form.username }}
-        {% for error in form.username.errors %}
+        <label for="{{ form.username.id }}">{{ form.username.label }}</label> <!-- Etiqueta asociada al input username -->
+        {{ form.username }} <!-- Renderiza el campo usuario -->
+        {% for error in form.username.errors %} <!-- Errores de validación del campo usuario -->
             <p role="alert">{{ error }}</p>
         {% endfor %}
         </div>
 
         <div>
-        <label for="{{ form.password.id }}">{{ form.password.label }}</label>
-        {{ form.password }}
-        {% for error in form.password.errors %}
+        <label for="{{ form.password.id }}">{{ form.password.label }}</label> <!-- Etiqueta asociada al input password -->
+        {{ form.password }} <!-- Renderiza el campo contraseña -->
+        {% for error in form.password.errors %} <!-- Errores de validación del campo contraseña -->
             <p role="alert">{{ error }}</p>
         {% endfor %}
         </div>
 
-        {{ form.submit }}
+        {{ form.submit }} <!-- Botón "Entrar" -->
     </form>
-{% endblock %}
+{% endblock %} <!-- Fin del bloque content -->

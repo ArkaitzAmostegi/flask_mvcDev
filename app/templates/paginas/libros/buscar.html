@@ -1,35 +1,35 @@
-{% extends "base.html" %}
-{% block title %}Buscar{% endblock %}
+{% extends "base.html" %} <!-- Hereda la plantilla base -->
+{% block title %}Buscar{% endblock %} <!-- Título de la página -->
 
-{% block content %}
+{% block content %} <!-- Bloque principal de contenido -->
     <h1>Buscar libros</h1>
 
-    <form method="post" novalidate>
-        {{ form.hidden_tag() }}
+    <form method="post" novalidate> <!-- Envía el formulario por POST; novalidate: valida WTForms -->
+        {{ form.hidden_tag() }} <!-- CSRF token + campos ocultos del formulario -->
 
         <div>
-        <label for="{{ form.titulo.id }}">{{ form.titulo.label }}</label>
-        {{ form.titulo }}
-        {% for error in form.titulo.errors %}
+        <label for="{{ form.titulo.id }}">{{ form.titulo.label }}</label> <!-- Etiqueta del campo título -->
+        {{ form.titulo }} <!-- Input para escribir el título a buscar -->
+        {% for error in form.titulo.errors %} <!-- Errores de validación del campo -->
             <p role="alert">{{ error }}</p>
         {% endfor %}
         </div>
 
-        {{ form.submit }}
+        {{ form.submit }} <!-- Botón "Buscar" -->
     </form>
 
     <hr>
 
-    {% if libros %}
+    {% if libros %} <!-- Solo muestra resultados si la lista no está vacía -->
         <h2>Resultados</h2>
         <ul>
-        {% for libro in libros %}
+        {% for libro in libros %} <!-- Recorre los libros encontrados -->
             <li>
-            <a href="{{ url_for('libros.detalle', id=libro.id) }}">{{ libro.titulo }}</a>
-            — {{ libro.autor }}
-            — {% if libro.disponible %}Disponible{% else %}Prestado{% endif %}
+            <a href="{{ url_for('libros.detalle', id=libro.id) }}">{{ libro.titulo }}</a> <!-- Enlace al detalle -->
+            — {{ libro.autor }} <!-- Muestra autor -->
+            — {% if libro.disponible %}Disponible{% else %}Prestado{% endif %} <!-- Estado del libro -->
             </li>
         {% endfor %}
         </ul>
     {% endif %}
-{% endblock %}
+{% endblock %} 

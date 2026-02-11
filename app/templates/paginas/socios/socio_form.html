@@ -1,43 +1,45 @@
-{% extends "base.html" %}
-{% if modo == "crear" %}
+{% extends "base.html" %} <!-- Hereda la plantilla base -->
+
+{% if modo == "crear" %} <!-- Decide el título según el modo -->
     {% set titulo = "Crear socio" %}
 {% else %}
     {% set titulo = "Editar socio" %}
 {% endif %}
-{% block title %}{{ titulo }}{% endblock %}
 
-{% block content %}
-    <h1>{{ titulo }}</h1>
+{% block title %}{{ titulo }}{% endblock %} <!-- Título de la página (pestaña) -->
 
-    <form method="post" novalidate class="panel">
-        {{ form.hidden_tag() }}
+{% block content %} <!-- Contenido principal -->
+    <h1>{{ titulo }}</h1> <!-- Encabezado visible -->
+
+    <form method="post" novalidate class="panel"> <!-- POST para guardar; novalidate: valida WTForms -->
+        {{ form.hidden_tag() }} <!-- CSRF token + campos ocultos -->
 
         <div>
-        <label for="{{ form.codigo.id }}">{{ form.codigo.label }}</label>
-        {{ form.codigo }}
-        {% for error in form.codigo.errors %}
+        <label for="{{ form.codigo.id }}">{{ form.codigo.label }}</label> <!-- Etiqueta del código -->
+        {{ form.codigo }} <!-- Input del código -->
+        {% for error in form.codigo.errors %} <!-- Errores del código -->
             <p role="alert">{{ error }}</p>
         {% endfor %}
         </div>
 
         <div>
-        <label for="{{ form.nombre.id }}">{{ form.nombre.label }}</label>
-        {{ form.nombre }}
-        {% for error in form.nombre.errors %}
+        <label for="{{ form.nombre.id }}">{{ form.nombre.label }}</label> <!-- Etiqueta del nombre -->
+        {{ form.nombre }} <!-- Input del nombre -->
+        {% for error in form.nombre.errors %} <!-- Errores del nombre -->
             <p role="alert">{{ error }}</p>
         {% endfor %}
         </div>
 
         <div>
-        <label for="{{ form.email.id }}">{{ form.email.label }}</label>
-        {{ form.email }}
-        {% for error in form.email.errors %}
+        <label for="{{ form.email.id }}">{{ form.email.label }}</label> <!-- Etiqueta del email -->
+        {{ form.email }} <!-- Input del email -->
+        {% for error in form.email.errors %} <!-- Errores del email -->
             <p role="alert">{{ error }}</p>
         {% endfor %}
         </div>
 
-        {{ form.submit }}
+        {{ form.submit }} <!-- Botón "Guardar" -->
 
-        <a class="btn secondary" href="{{ url_for('socios.listar') }}">Volver</a>
+        <a class="btn secondary" href="{{ url_for('socios.listar') }}">Volver</a> <!-- Enlace para volver al listado -->
     </form>
-{% endblock %}
+{% endblock %} 

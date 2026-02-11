@@ -1,41 +1,41 @@
-{% extends "base.html" %}
-{% block title %}Socios{% endblock %}
+{% extends "base.html" %} <!-- Hereda la plantilla base -->
+{% block title %}Socios{% endblock %} <!-- Título de la página -->
 
-{% block content %}
+{% block content %} <!-- Contenido principal -->
 <h1>Socios</h1>
 
-<div style="display:flex; gap:.5rem; flex-wrap:wrap;">
-  <a class="btn" href="{{ url_for('socios.crear') }}">Crear socio</a>
-  <a class="btn secondary" href="{{ url_for('socios.buscar') }}">Buscar socio</a>
+<div style="display:flex; gap:.5rem; flex-wrap:wrap;"> <!-- Barra de acciones (botones) -->
+  <a class="btn" href="{{ url_for('socios.crear') }}">Crear socio</a> <!-- Ir a formulario de alta -->
+  <a class="btn secondary" href="{{ url_for('socios.buscar') }}">Buscar socio</a> <!-- Ir al buscador -->
 </div>
 
-<hr>
+<hr> 
 
-{% if socios %}
+{% if socios %} <!-- Solo muestra listado si hay socios -->
   <ul>
-    {% for socio in socios %}
+    {% for socio in socios %} <!-- Recorre socios -->
       <li>
-        <strong>{{ socio.codigo }}</strong> — {{ socio.nombre }} — {{ socio.email }}
+        <strong>{{ socio.codigo }}</strong> — {{ socio.nombre }} — {{ socio.email }} <!-- Datos del socio -->
 
-        {% if socio.libro_prestado %}
-          — <span class="pill bad">Prestado</span>
-          — Libro: <strong>{{ socio.libro_prestado.titulo }}</strong>
-        {% else %}
+        {% if socio.libro_prestado %} <!-- Si tiene un libro prestado -->
+          — <span class="pill bad">Prestado</span> <!-- Etiqueta visual de estado -->
+          — Libro: <strong>{{ socio.libro_prestado.titulo }}</strong> <!-- Título del libro -->
+        {% else %} <!-- Si no tiene préstamo -->
           — <span class="pill ok">Sin préstamo</span>
         {% endif %}
 
-        — <a href="{{ url_for('socios.editar', id=socio.id) }}">Editar</a>
+        — <a href="{{ url_for('socios.editar', id=socio.id) }}">Editar</a> <!-- Enlace a editar socio -->
 
         <form method="post"
               action="{{ url_for('socios.borrar', id=socio.id) }}"
               style="display:inline"
-              onsubmit="return confirm('¿Borrar socio {{ socio.codigo }}?');">
-          <button type="submit" class="btn danger">Borrar</button>
+              onsubmit="return confirm('¿Borrar socio {{ socio.codigo }}?');"> <!-- Confirmación antes de borrar -->
+          <button type="submit" class="btn danger">Borrar</button> <!-- Envía POST para borrar -->
         </form>
       </li>
     {% endfor %}
   </ul>
-{% else %}
+{% else %} <!-- Si no hay socios -->
   <p>No hay socios.</p>
 {% endif %}
-{% endblock %}
+{% endblock %} 
