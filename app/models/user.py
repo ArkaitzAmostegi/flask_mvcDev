@@ -8,7 +8,7 @@ class User(db.Model, UserMixin):
 
     id = db.Column(db.Integer, primary_key=True)  # Clave primaria
     username = db.Column(db.String(50), unique=True, nullable=False)  # Usuario único y obligatorio
-    password_hash = db.Column(db.String(255), nullable=False)  # Hash de la contraseña (no se guarda en claro)
+    password_hash = db.Column(db.String(255), nullable=False)  # Hash de la contraseña 
     role = db.Column(db.String(20), nullable=False, default="admin")  # Rol para controlar permisos
 
     def set_password(self, password: str):
