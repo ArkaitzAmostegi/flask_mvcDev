@@ -1,25 +1,34 @@
 from app.extensions import db
 
 class Libro(db.Model):
-    """Modelo ORM de un libro (tabla 'libros')."""
-    __tablename__ = "libros"  # Nombre real de la tabla en la BD
+    __tablename__ = "libros"
 
-    id = db.Column(db.Integer, primary_key=True)  # Clave primaria
-    titulo = db.Column(db.String(200), nullable=False)  # Título obligatorio
-    autor = db.Column(db.String(100), nullable=False)  # Autor obligatorio
-    resumen = db.Column(db.Text, nullable=True)  # Resumen opcional
+    id = db.Column(db.Integer, primary_key=True)
+    titulo = db.Column(db.String(200), nullable=False)
+    genero = db.Column(db.String(200), nullable=False)
+    autor = db.Column(db.String(100), nullable=False)
+    resumen = db.Column(db.Text, nullable=True)
 
-    categoria = db.Column(db.String(80), nullable=True)  # Categoría opcional
-    anio = db.Column(db.Integer, nullable=True)  # Año opcional
+    categoria = db.Column(db.String(80), nullable=True)
+    anio = db.Column(db.Integer, nullable=True)
 
-    socio_id = db.Column(db.Integer, db.ForeignKey("socios.id"), nullable=True)  # Socio que lo tiene prestado (si hay)
+    socio_id = db.Column(db.Integer, db.ForeignKey("socios.id"), nullable=True)
 
-    socio = db.relationship(
-        "Socio",
-        back_populates="libro_prestado"  # Relación inversa definida en Socio
-    )
+    socio = db.relationship("Socio", back_populates="libro_prestado")
 
     @property
     def disponible(self):
-        """Devuelve True si el libro no está prestado (no tiene socio asociado)."""
         return self.socio_id is None
+
+    def to_dict(self):
+        return {
+            "id": self.id,
+            "titulo": self.titulo,
+            "genero": self.genero,
+            "autor": self.autor,
+            "resumen": self.resumen,
+            "categoria": self.categoria,
+            "anio": self.anio,
+            "socio_id": self.socio_id,
+            "disponible": self.disponible,
+        }

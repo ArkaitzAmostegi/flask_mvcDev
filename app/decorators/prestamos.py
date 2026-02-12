@@ -1,10 +1,9 @@
-# app/decorators/prestamos.py
 from functools import wraps
 from flask import request, redirect, url_for, flash
 from app.services.libros_service import obtener_libro
 
 def validar_prestamo():
-    """Decorator que valida lo mínimo antes de prestar: libro existente y socio_codigo informado."""
+    """Decorator que valida antes de prestar: libro existente y socio_codigo informado."""
     def decorator(fn):
         @wraps(fn)  # Mantiene nombre de la función original
         def wrapper(*args, **kwargs):

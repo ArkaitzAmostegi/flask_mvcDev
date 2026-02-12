@@ -10,6 +10,7 @@
         <div class="card"> <!-- Tarjeta individual de un libro -->
             <h1>Titulo: {{ libro.titulo }}</h1> <!-- Muestra el título -->
             <div class="autor">Autor: {{ libro.autor }}</div> <!-- Muestra el autor -->
+            <div class="genero">Género: {{ libro.genero or "Sin género" }}</div>
             <div class="resumen">{{ libro.resumen }}</div> <!-- Muestra el resumen -->
             <div class="autor">
                 Estado: {% if libro.disponible %}Disponible{% else %}Prestado{% endif %} <!-- Estado del libro -->

@@ -8,10 +8,12 @@
 <ul>
     {% for libro in libros %} <!-- Recorre la lista de libros que llega desde la ruta -->
         <li>
-            <a href="{{ url_for('libros.detalle', id=libro.id) }}">{{ libro.titulo }}</a> <!-- Enlace al detalle -->
-            — {{ libro.autor }} <!-- Muestra autor -->
-            — {% if libro.disponible %}Disponible{% else %}Prestado{% endif %} <!-- Estado del libro -->
+            <a href="{{ url_for('libros.detalle', id=libro.id) }}">{{ libro.titulo }}</a>
+            — {{ libro.autor }}
+            — {{ libro.genero or "Sin género" }}
+            — {% if libro.disponible %}Disponible{% else %}Prestado{% endif %}
         </li>
+
     {% endfor %}
 </ul>
 

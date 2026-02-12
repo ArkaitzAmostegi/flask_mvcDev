@@ -48,11 +48,12 @@ def obtener_libro(libro_id: int):
     return Libro.query.get(libro_id)
 
 
-def crear_libro(titulo, autor, resumen=None, categoria=None, anio=None):
+def crear_libro(titulo, autor, genero, resumen=None, categoria=None, anio=None):
     """Crea y guarda un libro nuevo en la base de datos."""
     libro = Libro(
         titulo=titulo,
         autor=autor,
+        genero=genero,
         resumen=resumen,
         categoria=categoria,
         anio=anio

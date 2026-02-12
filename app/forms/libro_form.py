@@ -12,6 +12,10 @@ class LibroForm(FlaskForm):
         "Autor",
         validators=[DataRequired(), Length(max=100)]
     )
+    genero = StringField(  # Género obligatorio (máx. 100)
+        "Genero",
+        validators=[DataRequired(), Length(max=100)]
+    )
     resumen = TextAreaField(  # Resumen opcional (texto largo)
         "Resumen",
         validators=[Optional()]

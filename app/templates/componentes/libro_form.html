@@ -18,6 +18,14 @@
     </div>
 
     <div>
+        <label for="{{ form.genero.id }}">{{ form.genero.label }}</label>
+        {{ form.genero }}
+        {% for error in form.genero.errors %}
+            <p role="alert">{{ error }}</p>
+        {% endfor %}
+    </div>
+
+    <div>
         <label for="{{ form.resumen.id }}">{{ form.resumen.label }}</label> <!-- Etiqueta del resumen -->
         {{ form.resumen }} <!-- Textarea resumen -->
         {% for error in form.resumen.errors %} <!-- Errores del resumen -->
