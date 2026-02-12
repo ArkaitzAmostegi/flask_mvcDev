@@ -24,8 +24,8 @@ class Libro(db.Model):
         return {
             "id": self.id,
             "titulo": self.titulo,
-            "genero": self.genero,
             "autor": self.autor,
+            "genero": self.genero,
             "resumen": self.resumen,
             "categoria": self.categoria,
             "anio": self.anio,

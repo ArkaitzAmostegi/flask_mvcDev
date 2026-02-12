@@ -53,13 +53,13 @@ def detalle(id):
 
 
 @libros_bp.route("/<int:id>/prestar", methods=["POST"])  # Ruta: realiza el préstamo de un libro
-@validar_prestamo()  # Valida reglas del préstamo (por ejemplo: libro disponible, socio válido, etc.)
 @role_required("admin")  # Solo admin puede prestar
+@validar_prestamo()  # Valida reglas del préstamo (por ejemplo: libro disponible, socio válido, etc.)
 def prestar(id):
     """Procesa el préstamo del libro indicado para el socio del formulario."""
     form = PrestamoForm()
     if form.validate_on_submit():
-        ok, msg = prestar_libro(id, form.socio_codigo.data)
+        ok, msg = prestar_libro(id, form.socio_codigo.data.strip())
         flash(msg, "ok" if ok else "error")
     return redirect(url_for("libros.detalle", id=id))
 
