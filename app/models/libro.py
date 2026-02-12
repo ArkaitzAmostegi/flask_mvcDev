@@ -21,6 +21,7 @@ class Libro(db.Model):
         return self.socio_id is None
 
     def to_dict(self):
+        """Convierte el libro a diccionario para respuestas JSON."""
         return {
             "id": self.id,
             "titulo": self.titulo,
